@@ -1,13 +1,7 @@
-import "./App.css";
+import AppRoutes from "./routes";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Facial comparison app</h1>
-      </header>
-    </div>
-  );
+  return <AppRoutes />;
 }
 
 export default App;
