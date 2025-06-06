@@ -1,44 +1,73 @@
-const mockImageData = [
+export const matchedFoldersData = [
   {
-    id: "folder1",
-    folderName: "Folder A",
+    folderId: "dfea7a8a-b3c2-4bc7-b5f8-b177eb64ec50",
     images: [
-      { id: "imgA1", filename: "1.png" },
-      { id: "imgA2", filename: "1.png" },
-      { id: "imgA3", filename: "1.png" },
-      { id: "imgA4", filename: "1.png" },
-      { id: "imgA5", filename: "1.png" },
-      { id: "imgA6", filename: "1.png" },
-      { id: "imgA7", filename: "1.png" },
-      { id: "imgA8", filename: "1.png" },
-      { id: "imgA9", filename: "1.png" },
-      { id: "imgA10", filename: "1.png" },
-      { id: "imgA11", filename: "1.png" },
-      { id: "imgA12", filename: "1.png" },
-      { id: "imgA13", filename: "1.png" },
-      { id: "imgA14", filename: "1.png" },
-      { id: "imgA15", filename: "1.png" },
-      { id: "imgA16", filename: "1.png" },
-      { id: "imgA17", filename: "1.png" },
-      { id: "imgA18", filename: "1.png" },
+      { id: "imgA1", filename: "1.jpg" },
+      { id: "imgA2", filename: "2.jpg" },
+      { id: "imgA3", filename: "3.jpg" },
+      { id: "imgA4", filename: "7.jpg" },
+      { id: "imgA5", filename: "1.jpg" },
+      { id: "imgA6", filename: "2.jpg" },
+      { id: "imgA7", filename: "3.jpg" },
+      { id: "imgA8", filename: "7.jpg" },
+      { id: "imgA9", filename: "3.jpg" },
+      { id: "imgA10", filename: "7.jpg" },
     ],
   },
   {
-    id: "folder2",
-    folderName: "Folder B",
+    folderId: "dfea7a8a-b3c2-4bc7-b5f8-b177eb642510",
     images: [
-      { id: "imgB1", filename: "1.png" },
-      { id: "imgB2", filename: "1.png" },
-    ],
-  },
-  {
-    id: "folder3",
-    folderName: "Folder C",
-    images: [
-      { id: "imgC1", filename: "1.png" },
-      { id: "imgC2", filename: "1.png" },
+      { id: "imgB1", filename: "1.jpg" },
+      { id: "imgB2", filename: "2.jpg" },
     ],
   },
 ];
 
-export default mockImageData;
+export const allFoldersData = [
+  {
+    folderId: "dfea7a8a-b3c2-4bc7-b5f8-b177eb64ec50",
+    images: [
+      { id: "imgA1", filename: "1.jpg" },
+      { id: "imgA2", filename: "2.jpg" },
+      { id: "imgA3", filename: "3.jpg" },
+      { id: "imgA4", filename: "7.jpg" },
+    ],
+  },
+  {
+    folderId: "dfea7a8a-b3c2-4bc7-b5f8-b177eb642510",
+    images: [
+      { id: "imgB1", filename: "1.jpg" },
+      { id: "imgB2", filename: "2.jpg" },
+    ],
+  },
+  {
+    folderId: "27803dbf-fa92-46f9-b595-480a926cdd15a",
+    images: [
+      { id: "imgC1", filename: "1.jpg" },
+      { id: "imgC2", filename: "1.jpg" },
+    ],
+  },
+  {
+    folderId: "dfea7a8a-b3c2-4bc7-b5f8-b177eb64ec61",
+    images: [
+      { id: "imgD1", filename: "1.jpg" },
+      { id: "imgD2", filename: "2.jpg" },
+      { id: "imgD3", filename: "3.jpg" },
+      { id: "imgD4", filename: "7.jpg" },
+    ],
+  },
+  {
+    folderId: "dfea7a8a-b3c2-4bc7-b5f8-b177eb642266",
+    images: [
+      { id: "imgE1", filename: "1.jpg" },
+      { id: "imgE2", filename: "2.jpg" },
+    ],
+  },
+  {
+    folderId: "dfea7a8a-b3c2-4bc7-b5f8-b177eb642551",
+    images: [
+      { id: "imgF1", filename: "1.jpg" },
+      { id: "imgF2", filename: "2.jpg" },
+    ],
+  },
+];

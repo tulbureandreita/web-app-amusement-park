@@ -2,17 +2,31 @@ import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
   mainWrapper: {
-    padding: 20,
+    padding: 24,
   },
-  folderItem: {
-    cursor: "pointer",
-    padding: 10,
-    marginBottom: 10,
-    backgroundColor: "#f5f5f5",
-    borderRadius: 6,
-    "&:hover": {
-      backgroundColor: "#e0e0e0",
-    },
+  folderCard: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: 16,
+    border: "1px solid #ddd",
+    borderRadius: 12,
+    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+    backgroundColor: "#fff",
+  },
+  folderIconButton: {
+    marginBottom: 8,
+  },
+  folderIcon: {
+    fontSize: 60,
+    color: "#1976d2",
+  },
+  folderFooter: {
+    display: "flex",
+    alignItems: "center",
+    gap: 8,
+    justifyContent: "center",
+    marginTop: 4,
   },
 });
 

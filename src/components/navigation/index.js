@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import Toolbar from "@mui/material/Toolbar";
+import { useNavigate } from "react-router-dom";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
@@ -8,27 +9,24 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import TextField from "@mui/material/TextField";
+import { Box, Button } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import useStyles from "./styles";
 
 function NavigationContent() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const classes = useStyles();
   const location = useLocation();
-
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-    console.log("Search Term:", event.target.value);
-  };
+  const navigate = useNavigate();
 
   return (
     <div>
       <Toolbar>
         <Typography variant="h6" noWrap component="div">
-          Menu
+          Logo
         </Typography>
       </Toolbar>
-      <Divider />
       <List>
         <ListItem disablePadding>
           <ListItemButton
@@ -38,34 +36,11 @@ function NavigationContent() {
               location.pathname === "/app/home" || location.pathname === "/app"
             }
           >
-            <ListItemIcon>
+            <ListItemIcon style={{ marginRight: -20 }}>
               <HomeIcon />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding sx={{ display: "block", mt: 1, mb: 1, px: 2 }}>
-          <Typography
-            variant="overline"
-            sx={{ display: "block", mb: 0.5, color: "text.secondary" }}
-          >
-            Search
-          </Typography>
-          <TextField
-            fullWidth
-            variant="outlined"
-            size="small"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-            InputProps={{
-              startAdornment: (
-                <ListItemIcon sx={{ minWidth: "auto", mr: 1 }}>
-                  <SearchIcon fontSize="small" />
-                </ListItemIcon>
-              ),
-            }}
-          />
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton
@@ -73,14 +48,29 @@ function NavigationContent() {
             to="/app/search"
             selected={location.pathname === "/app/search"}
           >
-            <ListItemIcon>
+            <ListItemIcon style={{ marginRight: -20 }}>
               <SearchIcon />
             </ListItemIcon>
-            <ListItemText primary="Search Page" />
+            <ListItemText primary="Search" />
           </ListItemButton>
         </ListItem>
       </List>
-      <Divider />
+      <Divider sx={{ my: 3 }} />
+      <Box className={classes.takePicturesContainer}>
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          startIcon={<CameraAltIcon />}
+          className={classes.takePicturesButton}
+          onClick={() => {
+            // TODO: Add functionality here
+            navigate("/app/home");
+          }}
+        >
+          Take Picture
+        </Button>
+      </Box>
     </div>
   );
 }

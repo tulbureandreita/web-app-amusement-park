@@ -17,7 +17,7 @@ function AppLayout() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", height: "100%" }}>
       <AppBar
         position="fixed"
         sx={{
@@ -75,10 +75,10 @@ function AppLayout() {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
+          p: { sm: 3 },
           width: { sm: `calc(100% - ${240}px)` },
           mt: "64px",
-          ml: "240px",
+          ml: { sm: `${240}px` },
         }}
       >
         <Outlet />

@@ -1,13 +1,22 @@
 import { createUseStyles } from "react-jss";
 const useStyles = createUseStyles({
   mainWrapper: {
-    padding: 20,
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
+    padding: 16,
+    boxSizing: "border-box",
   },
   buttonsWrapper: {
     marginBottom: 20,
     display: "flex",
     justifyContent: "space-between",
-    marginTop: 20,
+  },
+  gridWrapper: {
+    flexGrow: 1,
+    height: "80%",
+    overflowY: "auto",
+    marginTop: 8,
   },
   imageBox: {
     position: "relative",
@@ -19,6 +28,10 @@ const useStyles = createUseStyles({
     left: 5,
     background: "#fff",
     borderRadius: 4,
+    "&:hover": {
+      backgroundColor: "#fff",
+      boxShadow: "none",
+    },
   },
   image: {
     width: 150,
@@ -43,8 +56,7 @@ const useStyles = createUseStyles({
     marginTop: 10,
   },
   previewImage: {
-    width: 100,
-    height: 100,
+    width: 200,
     objectFit: "cover",
     borderRadius: 6,
   },

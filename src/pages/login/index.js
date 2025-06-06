@@ -57,6 +57,7 @@ function LoginPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validate()) {
+      sessionStorage.setItem("auth", "true");
       navigate("/app");
     }
   };
