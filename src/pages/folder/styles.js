@@ -4,7 +4,7 @@ const useStyles = createUseStyles({
     display: "flex",
     flexDirection: "column",
     height: "100%",
-    padding: 16,
+    padding: "14px 14px 0px 14px",
     boxSizing: "border-box",
   },
   buttonsWrapper: {

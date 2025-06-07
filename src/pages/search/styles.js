@@ -2,7 +2,7 @@ import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
   mainWrapper: {
-    padding: 24,
+    padding: 14,
   },
   folderCard: {
     display: "flex",
@@ -13,6 +13,7 @@ const useStyles = createUseStyles({
     borderRadius: 12,
     boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
     backgroundColor: "#fff",
+    width: "fit-content",
   },
   folderIconButton: {
     marginBottom: 8,
@@ -35,7 +36,9 @@ const useStyles = createUseStyles({
     alignItems: "center",
   },
   searchInput: {
-    minWidth: 250,
+    minWidth: 0,
+    flexGrow: 1,
+    maxWidth: 300,
   },
 });
 

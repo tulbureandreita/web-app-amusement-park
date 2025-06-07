@@ -13,12 +13,14 @@ import {
 import { allFoldersData } from "../../mock/imageData";
 import ImageOverlay from "../../components/imageOverlay";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import { useTranslation } from "react-i18next";
 import useStyles from "./styles";
 
 const FolderPage = () => {
   const classes = useStyles();
   const { folderId } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const folder = allFoldersData.find((f) => f.folderId === folderId);
 
@@ -54,12 +56,11 @@ const FolderPage = () => {
     });
   };
 
-  if (!folder) return <Typography>Folder not found</Typography>;
+  if (!folder) return <Typography>{t("folderNotFound")}</Typography>;
 
   return (
     <Box className={classes.mainWrapper}>
       <Box
-        gutterBottom
         sx={{
           display: "flex",
           alignItems: "center",
@@ -67,24 +68,23 @@ const FolderPage = () => {
           marginBottom: "16px",
         }}
       >
-        <Typography variant="h5">{folder.folderId}</Typography>
-        <Tooltip title="Copy ID">
+        <Typography variant="h6">{folder.folderId}</Typography>
+        <Tooltip title={t("copyIdTooltip")}>
           <IconButton size="small" onClick={() => handleCopy(folder.folderId)}>
             <ContentCopyIcon fontSize="inherit" />
           </IconButton>
         </Tooltip>
       </Box>
-
       <Box className={classes.buttonsWrapper}>
         <Button variant="outlined" onClick={() => navigate(-1)}>
-          Back
+          {t("folderBackButton")}
         </Button>
         <Button
           variant="contained"
           onClick={() => setPrintModalOpen(true)}
           disabled={selectedImages.length === 0}
         >
-          Print
+          {t("folderPrintButton")}
         </Button>
       </Box>
       <Box className={classes.gridWrapper}>
@@ -94,9 +94,8 @@ const FolderPage = () => {
             const isChecked = selectedImages.some(
               (selImg) => selImg.id === imageObj.id
             );
-
             return (
-              <Grid item key={imageObj.id}>
+              <Grid key={imageObj.id}>
                 <Box className={classes.imageBox}>
                   <Checkbox
                     checked={isChecked}
@@ -126,22 +125,22 @@ const FolderPage = () => {
         <Box className={classes.modal}>
           <Box className={classes.buttonsWrapper}>
             <Typography variant="h6">
-              Images selected: {selectedImages.length}
+              {t("printModalSelected")} {selectedImages.length}
             </Typography>
             <Button
               variant="contained"
               onClick={() => console.log("PRINT", selectedImages)}
               disabled={selectedImages.length === 0}
             >
-              Print
+              {t("printModalButton")}
             </Button>
           </Box>
           {selectedImages.length === 0 ? (
-            <Typography>No images selected</Typography>
+            <Typography>{t("printModalEmpty")}</Typography>
           ) : (
             <Grid container spacing={2} className={classes.previewGrid}>
               {selectedImages.map((selectedImgObj) => (
-                <Grid item key={selectedImgObj.id}>
+                <Grid key={selectedImgObj.id}>
                   <img
                     src={`/mock-images/${selectedImgObj.filename}`}
                     alt={selectedImgObj.filename}

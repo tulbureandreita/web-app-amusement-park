@@ -3,6 +3,7 @@ import { Dialog, DialogContent, IconButton, Button } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { useTranslation } from "react-i18next";
 
 const ImageOverlay = ({
   open,
@@ -15,6 +16,7 @@ const ImageOverlay = ({
   hasNext,
   hasPrev,
 }) => {
+  const { t } = useTranslation();
   if (!imageObj) return null;
 
   const imageUrl = `/mock-images/${imageObj.filename}`;
@@ -27,9 +29,8 @@ const ImageOverlay = ({
           variant="contained"
           color={isSelected ? "error" : "primary"}
         >
-          {isSelected ? "Uncheck" : "Check"}
+          {isSelected ? t("imageUncheckButton") : t("imageCheckButton")}
         </Button>
-
         <IconButton
           onClick={onClose}
           style={{ position: "absolute", top: 8, right: 8, zIndex: 2 }}
@@ -37,7 +38,6 @@ const ImageOverlay = ({
           <CloseIcon />
         </IconButton>
       </div>
-
       {hasPrev && (
         <IconButton
           onClick={goPrev}
@@ -47,7 +47,7 @@ const ImageOverlay = ({
             left: 10,
             transform: "translateY(-50%)",
             zIndex: 2,
-            backgroundColor: "rgba(255,255,255,0.7)",
+            backgroundColor: "rgba(255,255,255,0.9)",
           }}
         >
           <ArrowBackIosNewIcon />
@@ -62,13 +62,12 @@ const ImageOverlay = ({
             right: 10,
             transform: "translateY(-50%)",
             zIndex: 2,
-            backgroundColor: "rgba(255,255,255,0.7)",
+            backgroundColor: "rgba(255,255,255,0.9)",
           }}
         >
           <ArrowForwardIosIcon />
         </IconButton>
       )}
-
       <DialogContent
         style={{ padding: 0, textAlign: "center", overflow: "hidden" }}
       >

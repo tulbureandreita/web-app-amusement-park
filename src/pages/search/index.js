@@ -12,11 +12,13 @@ import {
 import FolderIcon from "@mui/icons-material/Folder";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { allFoldersData } from "../../mock/imageData";
+import { useTranslation } from "react-i18next";
 import useStyles from "./styles";
 
 const HomePage = () => {
   const classes = useStyles();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [searchValue, setSearchValue] = useState("");
   const [filteredFolders, setFilteredFolders] = useState(allFoldersData);
@@ -55,12 +57,11 @@ const HomePage = () => {
   return (
     <Box className={classes.mainWrapper}>
       <Typography variant="h5" gutterBottom>
-        All Folders
+        {t("searchTitle")}
       </Typography>
-
       <Box className={classes.searchContainer}>
         <TextField
-          label="Search Folder ID"
+          label={t("searchFieldLabel")}
           variant="outlined"
           size="small"
           value={searchValue}
@@ -69,17 +70,16 @@ const HomePage = () => {
           className={classes.searchInput}
         />
         <Button variant="contained" onClick={handleSearch}>
-          Search
+          {t("searchFieldButton")}
         </Button>
         <Button variant="outlined" onClick={handleReset}>
-          Reset
+          {t("searchFieldReset")}
         </Button>
       </Box>
-
       {filteredFolders.length > 0 ? (
         <Grid container spacing={3}>
           {filteredFolders.map((folder) => (
-            <Grid item xs={6} sm={4} md={3} lg={2} key={folder.folderId}>
+            <Grid key={folder.folderId}>
               <Box className={classes.folderCard}>
                 <IconButton
                   className={classes.folderIconButton}
@@ -88,10 +88,8 @@ const HomePage = () => {
                   <FolderIcon className={classes.folderIcon} />
                 </IconButton>
                 <Box className={classes.folderFooter}>
-                  <Typography variant="body2" noWrap>
-                    {folder.folderId}
-                  </Typography>
-                  <Tooltip title="Copy ID">
+                  <Typography variant="body2">{folder.folderId}</Typography>
+                  <Tooltip title={t("copyIdTooltip")}>
                     <IconButton
                       size="small"
                       onClick={() => handleCopy(folder.folderId)}
@@ -105,8 +103,8 @@ const HomePage = () => {
           ))}
         </Grid>
       ) : (
-        <Typography variant="body1" color="textSecondary" sx={{ mt: 4 }}>
-          No folders found.
+        <Typography color="textPrimary" sx={{ mt: 4 }}>
+          {t("searchEmptyData")}
         </Typography>
       )}
     </Box>

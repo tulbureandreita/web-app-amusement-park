@@ -7,9 +7,12 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import NavigationContent from "../../components/navigation";
+import NavigationContent from "../navigation";
+import { useTranslation } from "react-i18next";
 
 function AppLayout() {
+  const { t } = useTranslation();
+
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -37,7 +40,7 @@ function AppLayout() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Aquapark app
+            {t("appTitle")}
           </Typography>
         </Toolbar>
       </AppBar>

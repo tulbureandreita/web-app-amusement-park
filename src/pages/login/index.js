@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
+import { Button, TextField, Typography, Box, Paper } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import useStyles from "./styles";
 
 function LoginPage() {
   const classes = useStyles();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,18 +21,18 @@ function LoginPage() {
     let formIsValid = true;
 
     if (!email) {
-      tempErrors.email = "Email is required";
+      tempErrors.email = t("signInEmailRequired");
       formIsValid = false;
     } else if (email.toLowerCase() !== mockedEmail) {
-      tempErrors.email = "Invalid email";
+      tempErrors.email = t("signInEmailInvalid");
       formIsValid = false;
     }
 
     if (!password) {
-      tempErrors.password = "Password is required";
+      tempErrors.password = t("signInPasswordRequired");
       formIsValid = false;
     } else if (password !== mockedPassword) {
-      tempErrors.password = "Invalid password";
+      tempErrors.password = t("signInPasswordInvalid");
       formIsValid = false;
     }
 
@@ -80,7 +78,7 @@ function LoginPage() {
     <Box className={classes.mainWrapper}>
       <Paper className={classes.paper} elevation={3}>
         <Typography component="h1" variant="h4" className={classes.title}>
-          Sign In
+          {t("signInTitle")}
         </Typography>
         <Box
           component="form"
@@ -94,7 +92,7 @@ function LoginPage() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label={t("signInEmail")}
             name="email"
             autoComplete="email"
             autoFocus
@@ -110,7 +108,7 @@ function LoginPage() {
             required
             fullWidth
             name="password"
-            label="Password"
+            label={t("signInPassword")}
             type="password"
             id="password"
             autoComplete="current-password"
@@ -127,7 +125,7 @@ function LoginPage() {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            {t("signInButton")}
           </Button>
         </Box>
       </Paper>

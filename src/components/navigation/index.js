@@ -1,27 +1,37 @@
-import React, { useState } from "react";
-import { Link as RouterLink, useLocation } from "react-router-dom";
-import Toolbar from "@mui/material/Toolbar";
-import { useNavigate } from "react-router-dom";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import { Box, Button } from "@mui/material";
+import React from "react";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
+import {
+  Box,
+  Button,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { useTranslation } from "react-i18next";
 import useStyles from "./styles";
 
 function NavigationContent() {
   const classes = useStyles();
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const logOut = () => {
+    sessionStorage.removeItem("auth");
+    navigate("/login");
+  };
 
   return (
-    <div>
+    <>
       <Toolbar>
         <Typography variant="h6" noWrap component="div">
           Logo
@@ -39,7 +49,7 @@ function NavigationContent() {
             <ListItemIcon style={{ marginRight: -20 }}>
               <HomeIcon />
             </ListItemIcon>
-            <ListItemText primary="Home" />
+            <ListItemText primary={t("homeNavigationItem")} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -51,7 +61,7 @@ function NavigationContent() {
             <ListItemIcon style={{ marginRight: -20 }}>
               <SearchIcon />
             </ListItemIcon>
-            <ListItemText primary="Search" />
+            <ListItemText primary={t("searchNavigationItem")} />
           </ListItemButton>
         </ListItem>
       </List>
@@ -68,10 +78,21 @@ function NavigationContent() {
             navigate("/app/home");
           }}
         >
-          Take Picture
+          {t("takePictureButton")}
         </Button>
       </Box>
-    </div>
+      <Box sx={{ px: 2, mt: "auto", mb: "20px" }}>
+        <Button
+          variant="outlined"
+          color="secondary"
+          startIcon={<LogoutIcon />}
+          fullWidth
+          onClick={logOut}
+        >
+          {t("logoutButton")}
+        </Button>
+      </Box>
+    </>
   );
 }
 

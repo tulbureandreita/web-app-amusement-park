@@ -4,11 +4,13 @@ import { Box, Typography, IconButton, Tooltip, Grid } from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { matchedFoldersData } from "../../mock/imageData";
+import { useTranslation } from "react-i18next";
 import useStyles from "./styles";
 
 const HomePage = () => {
   const classes = useStyles();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleCopy = async (text) => {
     try {
@@ -21,13 +23,12 @@ const HomePage = () => {
   return (
     <Box className={classes.mainWrapper}>
       <Typography variant="h5" gutterBottom>
-        Matching Folders
+        {t("homeTitle")}
       </Typography>
-
       {matchedFoldersData.length > 0 ? (
         <Grid container spacing={3}>
           {matchedFoldersData.map((folder) => (
-            <Grid item xs={6} sm={4} md={3} lg={2} key={folder.folderId}>
+            <Grid key={folder.folderId}>
               <Box className={classes.folderCard}>
                 <IconButton
                   className={classes.folderIconButton}
@@ -36,9 +37,7 @@ const HomePage = () => {
                   <FolderIcon className={classes.folderIcon} />
                 </IconButton>
                 <Box className={classes.folderFooter}>
-                  <Typography variant="body2" noWrap>
-                    {folder.folderId}
-                  </Typography>
+                  <Typography variant="body2">{folder.folderId}</Typography>
                   <Tooltip title="Copy ID">
                     <IconButton
                       size="small"
@@ -53,7 +52,9 @@ const HomePage = () => {
           ))}
         </Grid>
       ) : (
-        <>Please take a picture to see matching folders</>
+        <Typography color="textPrimary" sx={{ mt: 4 }}>
+          {t("homeEmptyData")}
+        </Typography>
       )}
     </Box>
   );
