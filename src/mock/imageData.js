@@ -5,13 +5,10 @@ export const matchedFoldersData = [
       { id: "imgA1", filename: "1.jpg" },
       { id: "imgA2", filename: "2.jpg" },
       { id: "imgA3", filename: "3.jpg" },
-      { id: "imgA4", filename: "7.jpg" },
-      { id: "imgA5", filename: "1.jpg" },
-      { id: "imgA6", filename: "2.jpg" },
-      { id: "imgA7", filename: "3.jpg" },
-      { id: "imgA8", filename: "7.jpg" },
-      { id: "imgA9", filename: "3.jpg" },
-      { id: "imgA10", filename: "7.jpg" },
+      { id: "imgA4", filename: "4.jpg" },
+      { id: "imgA5", filename: "5.jpg" },
+      { id: "imgA6", filename: "6.jpg" },
+      { id: "imgA7", filename: "7.jpg" },
     ],
   },
   {
@@ -30,7 +27,10 @@ export const allFoldersData = [
       { id: "imgA1", filename: "1.jpg" },
       { id: "imgA2", filename: "2.jpg" },
       { id: "imgA3", filename: "3.jpg" },
-      { id: "imgA4", filename: "7.jpg" },
+      { id: "imgA4", filename: "4.jpg" },
+      { id: "imgA5", filename: "5.jpg" },
+      { id: "imgA6", filename: "6.jpg" },
+      { id: "imgA7", filename: "7.jpg" },
     ],
   },
   {
@@ -44,7 +44,7 @@ export const allFoldersData = [
     folderId: "27803dbf-fa92-46f9-b595-480a926cdd15a",
     images: [
       { id: "imgC1", filename: "1.jpg" },
-      { id: "imgC2", filename: "1.jpg" },
+      { id: "imgC2", filename: "4.jpg" },
     ],
   },
   {
