@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -8,20 +8,28 @@ import {
   Grid,
   TextField,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { allFoldersData } from "../../mock/imageData";
+// import { folders } from "../../mock/imageData";
 import { useTranslation } from "react-i18next";
+import { useFolders } from "../../context/foldersContext";
 import useStyles from "./styles";
 
-const HomePage = () => {
+const SearchPage = () => {
   const classes = useStyles();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { folders, loading, refreshFolders } = useFolders();
 
   const [searchValue, setSearchValue] = useState("");
-  const [filteredFolders, setFilteredFolders] = useState(allFoldersData);
+  const [searchResults, setSearchResults] = useState(null);
+  const [searchLoading, setSearchLoading] = useState(false);
+
+  useEffect(() => {
+    refreshFolders();
+  }, []);
 
   const handleCopy = async (text) => {
     try {
@@ -31,21 +39,31 @@ const HomePage = () => {
     }
   };
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     const trimmed = searchValue.trim();
     if (!trimmed) {
-      setFilteredFolders(allFoldersData);
-    } else {
-      const result = allFoldersData.filter(
-        (folder) => folder.folderId === trimmed
-      );
-      setFilteredFolders(result);
+      setSearchResults(null);
+      return;
     }
+
+    setSearchLoading(true);
+    try {
+      const res = await fetch(
+        `/api/search?uuid=${encodeURIComponent(trimmed)}`
+      );
+      const data = await res.json();
+      setSearchResults(data);
+    } catch (error) {
+      console.error("Search API error:", error);
+      setSearchResults([]);
+    }
+    setSearchLoading(false);
   };
 
   const handleReset = () => {
     setSearchValue("");
-    setFilteredFolders(allFoldersData);
+    setSearchResults(null);
+    refreshFolders();
   };
 
   const handleKeyPress = (e) => {
@@ -53,6 +71,11 @@ const HomePage = () => {
       handleSearch();
     }
   };
+
+  const displayedFolders = useMemo(() => {
+    if (searchResults !== null) return searchResults;
+    return folders;
+  }, [folders, searchResults]);
 
   return (
     <Box className={classes.mainWrapper}>
@@ -76,9 +99,13 @@ const HomePage = () => {
           {t("searchFieldReset")}
         </Button>
       </Box>
-      {filteredFolders.length > 0 ? (
+      {loading || searchLoading ? (
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 7 }}>
+          <CircularProgress />
+        </Box>
+      ) : displayedFolders.length > 0 ? (
         <Grid container spacing={3}>
-          {filteredFolders.map((folder) => (
+          {displayedFolders.map((folder) => (
             <Grid key={folder.folderId}>
               <Box className={classes.folderCard}>
                 <IconButton
@@ -111,4 +138,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default SearchPage;

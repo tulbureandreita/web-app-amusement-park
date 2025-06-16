@@ -7,6 +7,7 @@ import FolderPage from "../pages/folder";
 import SearchPage from "../pages/search";
 import PrivateRoute from "../components/privateRoute";
 import GlobalLayout from "../components/globalLayout";
+import { FoldersProvider } from "../context/foldersContext";
 
 const AppRoutes = () => (
   <GlobalLayout>
@@ -16,7 +17,9 @@ const AppRoutes = () => (
         path="/app"
         element={
           <PrivateRoute>
-            <AppLayout />
+            <FoldersProvider>
+              <AppLayout />
+            </FoldersProvider>
           </PrivateRoute>
         }
       >

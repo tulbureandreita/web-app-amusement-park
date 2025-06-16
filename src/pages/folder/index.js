@@ -9,11 +9,12 @@ import {
   Modal,
   Tooltip,
   IconButton,
+  Skeleton,
 } from "@mui/material";
-import { allFoldersData } from "../../mock/imageData";
 import ImageOverlay from "../../components/imageOverlay";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useTranslation } from "react-i18next";
+import { useFolders } from "../../context/foldersContext";
 import useStyles from "./styles";
 
 const FolderPage = () => {
@@ -21,12 +22,18 @@ const FolderPage = () => {
   const { folderId } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { folders } = useFolders();
 
-  const folder = allFoldersData.find((f) => f.folderId === folderId);
+  const folder = folders.find((f) => f.folderId === folderId);
 
   const [selectedImages, setSelectedImages] = useState([]);
   const [printModalOpen, setPrintModalOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const [loadedImages, setLoadedImages] = useState({});
+
+  const handleImageLoaded = (id) => {
+    setLoadedImages((prev) => ({ ...prev, [id]: true }));
+  };
 
   const handleCopy = async (text) => {
     try {
@@ -90,29 +97,60 @@ const FolderPage = () => {
       <Box className={classes.gridWrapper}>
         <Grid container spacing={2}>
           {folder.images.map((imageObj) => {
-            const fullPath = `/mock-images/${imageObj.filename}`;
+            const fullPath = `/photos/${folder.folderId}/${imageObj.filename}`;
             const isChecked = selectedImages.some(
               (selImg) => selImg.id === imageObj.id
             );
+            const isLoaded = loadedImages[imageObj.id];
+
             return (
               <Grid key={imageObj.id}>
-                <Box className={classes.imageBox}>
+                <Box
+                  className={classes.imageBox}
+                  style={{ position: "relative" }}
+                >
                   <Checkbox
                     checked={isChecked}
                     onChange={() => handleSelect(imageObj)}
                     className={classes.checkbox}
+                    style={{
+                      position: "absolute",
+                      top: 5,
+                      left: 5,
+                      zIndex: 10,
+                    }}
                   />
+                  {!isLoaded && (
+                    <Skeleton
+                      variant="rectangular"
+                      sx={{
+                        width: 350,
+                        height: "auto",
+                        aspectRatio: "3/2",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: "#f0f0f0",
+                        margin: "8px",
+                        borderRadius: 1,
+                      }}
+                    />
+                  )}
                   <img
                     key={imageObj.id}
                     src={fullPath}
                     alt={imageObj.filename}
                     onClick={() => handleImageClickForOverlay(imageObj)}
+                    onLoad={() => handleImageLoaded(imageObj.id)}
                     style={{
                       cursor: "pointer",
-                      width: 350,
+                      width: "100%",
+                      maxWidth: 350,
+                      height: "auto",
                       margin: 8,
                       outline: isChecked && "3px solid #1976d2",
                       borderRadius: 4,
+                      display: isLoaded ? "block" : "none",
                     }}
                   />
                 </Box>
@@ -142,7 +180,7 @@ const FolderPage = () => {
               {selectedImages.map((selectedImgObj) => (
                 <Grid key={selectedImgObj.id}>
                   <img
-                    src={`/mock-images/${selectedImgObj.filename}`}
+                    src={`/photos/${folder.folderId}/${selectedImgObj.filename}`}
                     alt={selectedImgObj.filename}
                     className={classes.previewImage}
                   />
@@ -171,6 +209,7 @@ const FolderPage = () => {
         goPrev={() => setSelectedImageIndex((prev) => Math.max(prev - 1, 0))}
         hasNext={selectedImageIndex < folder.images.length - 1}
         hasPrev={selectedImageIndex > 0}
+        folder={folder}
       />
     </Box>
   );

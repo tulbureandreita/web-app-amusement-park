@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
+import {
+  Box,
+  Drawer,
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import NavigationContent from "../navigation";
 import { useTranslation } from "react-i18next";

@@ -38,7 +38,7 @@ const useStyles = createUseStyles({
   searchInput: {
     minWidth: 0,
     flexGrow: 1,
-    maxWidth: 300,
+    maxWidth: 338,
   },
 });
 

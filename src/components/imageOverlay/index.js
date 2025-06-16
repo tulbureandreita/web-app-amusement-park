@@ -15,11 +15,12 @@ const ImageOverlay = ({
   goPrev,
   hasNext,
   hasPrev,
+  folder,
 }) => {
   const { t } = useTranslation();
   if (!imageObj) return null;
 
-  const imageUrl = `/mock-images/${imageObj.filename}`;
+  const imageUrl = `/photos/${folder.folderId}/${imageObj.filename}`;
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="fit-content">
