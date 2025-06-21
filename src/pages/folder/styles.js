@@ -50,7 +50,8 @@ const useStyles = createUseStyles({
     maxHeight: "80vh",
     overflowY: "auto",
     borderRadius: 8,
-    minWidth: 300,
+    minWidth: 350,
+    width: "auto",
   },
   previewGrid: {
     marginTop: 10,

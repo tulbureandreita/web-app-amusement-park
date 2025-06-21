@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
@@ -11,6 +12,7 @@ import {
   ListItemText,
   Toolbar,
   Typography,
+  CircularProgress,
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
@@ -24,6 +26,24 @@ function NavigationContent() {
   const location = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const [loading, setLoading] = useState(false);
+
+  const handleTakePhoto = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get("/camera/take-photo");
+      console.log("Photo taken:", res.data);
+      navigate("/app/home");
+    } catch (err) {
+      console.error("Error taking photo:", err);
+      alert(
+        "Failed to take photo. Make sure camera is connected and gphoto2 is installed."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const logOut = () => {
     sessionStorage.removeItem("auth");
@@ -71,14 +91,18 @@ function NavigationContent() {
           variant="contained"
           color="primary"
           size="large"
-          startIcon={<CameraAltIcon />}
+          startIcon={
+            loading ? (
+              <CircularProgress size={30} color="inherit" />
+            ) : (
+              <CameraAltIcon />
+            )
+          }
           className={classes.takePicturesButton}
-          onClick={() => {
-            // TODO: Add functionality here
-            navigate("/app/home");
-          }}
+          onClick={handleTakePhoto}
+          disabled={loading}
         >
-          {t("takePictureButton")}
+          {!loading && t("takePictureButton")}
         </Button>
       </Box>
       <Box sx={{ px: 2, mt: "auto", mb: "20px" }}>

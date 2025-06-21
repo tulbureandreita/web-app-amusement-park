@@ -24,7 +24,8 @@
   "folderBackButton": "Back",
   "folderPrintButton": "Print",
   "printModalSelected": "Images selected:",
-  "printModalButton": "Print",
+  "printModalButton": "Confirm",
+  "printModalButtonLoading": "Printing",
   "printModalEmpty": "No images selected",
   "imageCheckButton": "Check",
   "imageUncheckButton": "Uncheck"

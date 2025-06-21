@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -34,19 +35,15 @@ const HomePage = () => {
     const start = Date.now();
     let timeoutId;
 
-    fetch("/api/match", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    axios
+      .post("/api/match", {
         uuids: [
           "dfea7a8a-b3c2-4bc7-b5f8-b177eb64ec50",
           "dfea7a8a-b3c2-4bc7-b5f8-b177eb642510",
         ],
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setMatchedFoldersData(data);
+      })
+      .then((res) => {
+        setMatchedFoldersData(res.data);
 
         const elapsed = Date.now() - start;
         const delay = Math.max(300 - elapsed, 0);
@@ -56,7 +53,7 @@ const HomePage = () => {
         }, delay);
       })
       .catch((error) => {
-        console.error("Fetch error:", error);
+        console.error("Axios error:", error);
         setLoading(false);
       });
 

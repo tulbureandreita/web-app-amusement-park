@@ -15,6 +15,7 @@ import ImageOverlay from "../../components/imageOverlay";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useTranslation } from "react-i18next";
 import { useFolders } from "../../context/foldersContext";
+import PrintButton from "../../components/printButton";
 import useStyles from "./styles";
 
 const FolderPage = () => {
@@ -165,13 +166,10 @@ const FolderPage = () => {
             <Typography variant="h6">
               {t("printModalSelected")} {selectedImages.length}
             </Typography>
-            <Button
-              variant="contained"
-              onClick={() => console.log("PRINT", selectedImages)}
-              disabled={selectedImages.length === 0}
-            >
-              {t("printModalButton")}
-            </Button>
+            <PrintButton
+              selectedImages={selectedImages}
+              folderId={folder.folderId}
+            />
           </Box>
           {selectedImages.length === 0 ? (
             <Typography>{t("printModalEmpty")}</Typography>

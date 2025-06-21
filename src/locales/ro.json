@@ -24,7 +24,8 @@
   "folderBackButton": "Înapoi",
   "folderPrintButton": "Printează",
   "printModalSelected": "Imagini selectate:",
-  "printModalButton": "Printează",
+  "printModalButton": "Confirmă",
+  "printModalButtonLoading": "Se tipărește",
   "printModalEmpty": "Nicio imagine selectată",
   "imageCheckButton": "Selectează",
   "imageUncheckButton": "Deselectează"

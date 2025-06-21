@@ -5,6 +5,7 @@ import React, {
   useState,
   useCallback,
 } from "react";
+import axios from "axios";
 
 const FoldersContext = createContext();
 
@@ -19,15 +20,14 @@ export const FoldersProvider = ({ children }) => {
     let timeoutId;
 
     try {
-      const res = await fetch("/api/folders");
-      const data = await res.json();
-      setFolders(data);
+      const res = await axios.get("/api/folders");
+      setFolders(res.data);
 
       const elapsed = Date.now() - start;
       const delay = Math.max(300 - elapsed, 0);
       timeoutId = setTimeout(() => setLoading(false), delay);
     } catch (error) {
-      console.error("Fetch error:", error);
+      console.error("Axios fetch error:", error);
       setLoading(false);
     }
 

@@ -24,7 +24,8 @@
   "folderBackButton": "Zurück",
   "folderPrintButton": "Drucken",
   "printModalSelected": "Ausgewählte Bilder:",
-  "printModalButton": "Drucken",
+  "printModalButton": "Bestätigen",
+  "printModalButtonLoading": "Drucken",
   "printModalEmpty": "Keine Bilder ausgewählt",
   "imageCheckButton": "Auswählen",
   "imageUncheckButton": "Abwählen"

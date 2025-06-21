@@ -24,7 +24,8 @@
   "folderBackButton": "Назад",
   "folderPrintButton": "Печат",
   "printModalSelected": "Избрани снимки:",
-  "printModalButton": "Печат",
+  "printModalButton": "Потвърдете",
+  "printModalButtonLoading": "Печатане",
   "printModalEmpty": "Няма избрани снимки",
   "imageCheckButton": "Избери",
   "imageUncheckButton": "Премахни избора"

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -48,11 +49,10 @@ const SearchPage = () => {
 
     setSearchLoading(true);
     try {
-      const res = await fetch(
-        `/api/search?uuid=${encodeURIComponent(trimmed)}`
-      );
-      const data = await res.json();
-      setSearchResults(data);
+      const res = await axios.get(`/api/search`, {
+        params: { uuid: trimmed },
+      });
+      setSearchResults(res.data);
     } catch (error) {
       console.error("Search API error:", error);
       setSearchResults([]);
